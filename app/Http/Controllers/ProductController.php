@@ -42,4 +42,15 @@ class ProductController extends Controller
         // 処理が完了したらregistにリダイレクト
         return redirect(route('regist'));
     }
+
+
+    // public function registSubmit(Request $request){
+    //     //商品データを受け取る
+    //     $inputs = ($request->all());
+    //     //商品の登録
+    //     Product::regist($inputs);
+    //     \Session::flash('err_msg','登録が完了しました。');
+    //     return redirect(route('products'));
+    // }
+    
 }

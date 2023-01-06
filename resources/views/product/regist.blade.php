@@ -40,7 +40,7 @@
 
                     <a class="btn btn-secondary" href="{{route('Products')}}">キャンセル</a>
 
-                <button type="submit" class="btn btn-secondary">送信</button>
+                <button type="submit" class="btn btn-primary">送信</button>
             </form>
         </div>
     </div>
