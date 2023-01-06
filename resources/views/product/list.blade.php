@@ -7,6 +7,15 @@
   <title>商品一覧</title>
 </head>
 <body>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+      <h2>ブログ記事一覧</h2>
+
+          
+      </table>
+  </div>
+</div>
+
   
 </body>
 </html>
