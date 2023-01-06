@@ -13,4 +13,14 @@ class Product extends Model
 
         return $products;
     }
+
+    public function registProduct($date){
+        //登録処理
+        DB::table('product')->insert([
+            'product_name'=> $date->product_name,
+            'price'=> $date->price,
+            'stock'=> $date->stock,
+            'comment'=> $date->comment,
+        ]);
+    }
 }

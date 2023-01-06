@@ -20,3 +20,4 @@ Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/list', 'ProductController@showList')->name('Products');
 Route::get('/regist','ProductController@showRegistForm')->name('regist');
+Route::post('/regist','ProductController@registSubmit')->name('submit');
