@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -12,8 +13,14 @@ class ProductController extends Controller
      * @return view
      */
     public function showList(){
-        $products = Product::all();
+        //インスタンス生成
+        $model = new Product();
+        $products = $model->getList();
+        return view('product.list',['products'=>$products]);
+    }
 
-        return view('product.list',['products' => $products]);
+        //商品登録
+    public function showRegistForm(){
+        return view('regist');
     }
 }
