@@ -67,7 +67,7 @@ class ProductController extends Controller
             return back();
         }
         // 処理が完了したらregistにリダイレクト
-        return redirect(route('regist'));
+        return redirect(route('Products'));
     }
 
 
