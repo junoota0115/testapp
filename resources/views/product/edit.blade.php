@@ -8,7 +8,7 @@
             <h1>Edit Form</h1>
             <form action="{{route('update')}}" method="post" onSubmit="return checkSubmit()">
                 @csrf
-
+<input type="hidden" name="id" value="{{$product->id}}">
                 <div class="form-group">
                     <label for="product_name">商品名</label>
                     <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Product_name" value="{{ $product->product_name }}">

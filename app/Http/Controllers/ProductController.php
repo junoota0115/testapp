@@ -59,8 +59,8 @@ class ProductController extends Controller
 
         try{
             //登録で処理呼び出し
-            $model = new Product();
-            $model->registProduct($request);
+            $product = new Product();
+            $product->registProduct($request);
             DB::commit();
         }catch(\Exception $e){
             DB::rollback();
@@ -94,5 +94,32 @@ class ProductController extends Controller
             return redirect(route('Products'));
         }
         return view ('product.edit',['product' => $product]);
+    }
+
+    //更新登録
+    public function registUpdate(ProductRequest $request) {
+        $inputs = $request->all();
+
+        //トランザクション開始
+        DB::beginTransaction();
+
+        try{
+            //登録で処理呼び出し
+            $product = Product::find($inputs['id']);
+            $product->fill([
+                'product_name' => $inputs['product_name'],
+                'price' => $inputs['price'],
+                'stock' => $inputs['stock'],
+                'comment' => $inputs['comment'],
+            ]);
+            $product->save();
+            DB::commit();
+        }catch(\Throwable $e){
+            \DB::rollback();
+            abort(500);
+        }
+        // 処理が完了したらregistにリダイレクト
+        \Session::flash('err_msg','更新しました。');
+        return redirect(route('Products'));
     }
 }
