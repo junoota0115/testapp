@@ -10,16 +10,43 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
     /**
-     * ブログ一覧表示
+     * 商品一覧表示
      * 
      * @return view
      */
     public function showList(){
-        //インスタンス生成
-        $model = new Product();
-        $products = $model->getList();
-        return view('product.list',['products'=>$products]);
+        $products = Product::all();
+        return view ('product.list',['products' => $products]);
     }
+
+
+    // /**
+    //  * 商品一覧表示
+    //  * 
+    //  * @return view
+    //  */
+    // public function showList(){
+    //     //インスタンス生成
+    //     $model = new Product();
+    //     $products = $model->getList();
+    //     return view('product.list',['products'=>$products]);
+    // }
+    
+    /**
+     * 商品詳細表示
+     * @param int $id
+     * @return view
+     */
+    public function showDetail($id){
+        $product = Product::find($id);
+
+        if (is_null($product)){
+            \Session::flash('err_msg','データがありません');
+            return redirect(route('Products'));
+        }
+        return view ('product.detail',['product' => $product]);
+    }
+
 
         //商品登録画面表示
     public function showRegistForm(){
