@@ -59,15 +59,15 @@ class ProductController extends Controller
 
         try{
             //登録で処理呼び出し
-            $model = new Product();
-            $model->registProduct($request);
+            $product = new Product();
+            $product->registProduct($request);
             DB::commit();
         }catch(\Exception $e){
             DB::rollback();
             return back();
         }
         // 処理が完了したらregistにリダイレクト
-        return redirect(route('regist'));
+        return redirect(route('Products'));
     }
 
 
@@ -80,4 +80,46 @@ class ProductController extends Controller
     //     return redirect(route('products'));
     // }
     
+
+    /**
+     * 商品編集画面表示
+     * @param int $id
+     * @return view
+     */
+    public function showEdit($id){
+        $product = Product::find($id);
+
+        if (is_null($product)){
+            \Session::flash('err_msg','データがありません');
+            return redirect(route('Products'));
+        }
+        return view ('product.edit',['product' => $product]);
+    }
+
+    //更新登録
+    public function registUpdate(ProductRequest $request) {
+        $inputs = $request->all();
+
+        //トランザクション開始
+        DB::beginTransaction();
+
+        try{
+            //登録で処理呼び出し
+            $product = Product::find($inputs['id']);
+            $product->fill([
+                'product_name' => $inputs['product_name'],
+                'price' => $inputs['price'],
+                'stock' => $inputs['stock'],
+                'comment' => $inputs['comment'],
+            ]);
+            $product->save();
+            DB::commit();
+        }catch(\Throwable $e){
+            \DB::rollback();
+            abort(500);
+        }
+        // 処理が完了したらregistにリダイレクト
+        \Session::flash('err_msg','更新しました。');
+        return redirect(route('Products'));
+    }
 }
