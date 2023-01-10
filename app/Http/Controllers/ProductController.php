@@ -80,4 +80,19 @@ class ProductController extends Controller
     //     return redirect(route('products'));
     // }
     
+
+    /**
+     * 商品編集画面表示
+     * @param int $id
+     * @return view
+     */
+    public function showEdit($id){
+        $product = Product::find($id);
+
+        if (is_null($product)){
+            \Session::flash('err_msg','データがありません');
+            return redirect(route('Products'));
+        }
+        return view ('product.edit',['product' => $product]);
+    }
 }
