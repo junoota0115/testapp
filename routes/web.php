@@ -19,5 +19,9 @@ Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/list', 'ProductController@showList')->name('Products');
+
+// 商品詳細画面表示
+Route::get('/product/{id}','ProductController@showDetail')->name('show');
+
 Route::get('/regist','ProductController@showRegistForm')->name('regist');
 Route::post('/regist','ProductController@registSubmit')->name('submit');
