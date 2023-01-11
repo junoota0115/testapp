@@ -48,24 +48,36 @@ class ProductController extends Controller
     }
 
 
-        //商品登録画面表示
-    public function showRegistForm(){
+  /**
+     * 商品登録画面表示
+     * 
+     * @return view
+     */
+    public function showRegist(){
         return view('product.regist');
     }
 
-    public function registSubmit(ProductRequest $request) {
+      /**
+     * 商品を登録
+     * 
+     * @return view
+     */
+    public function exeSubmit(ProductRequest $request) {
+        //商品データの受け取り
+        $inputs = $request->all();
+        
         //トランザクション開始
-        DB::beginTransaction();
-
+        \DB::beginTransaction();
         try{
-            //登録で処理呼び出し
-            $product = new Product();
-            $product->registProduct($request);
-            DB::commit();
-        }catch(\Exception $e){
-            DB::rollback();
-            return back();
+        //商品登録で処理呼び出し
+            Product::submit($inputs);
+            \DB::commit();
+        }catch(\Throwable $e){
+            \DB::rollback();
+            abort(500);
         }
+
+        \Session::flash('err_msg', '商品を登録しました');
         // 処理が完了したらregistにリダイレクト
         return redirect(route('Products'));
     }

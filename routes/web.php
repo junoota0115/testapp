@@ -20,8 +20,11 @@ Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/list', 'ProductController@showList')->name('Products');
 
-Route::get('/regist','ProductController@showRegistForm')->name('regist');
-Route::post('/regist','ProductController@registSubmit')->name('submit');
+// 商品登録画面表示
+Route::get('/regist','ProductController@showRegist')->name('regist');
+
+//商品登録
+Route::post('/submit','ProductController@exeSubmit')->name('submit');
 
 // 商品詳細画面表示
 Route::get('/product/{id}','ProductController@showDetail')->name('show');
@@ -30,4 +33,4 @@ Route::get('/product/{id}','ProductController@showDetail')->name('show');
 Route::get('/product/edit/{id}','ProductController@showEdit')->name('edit');
 
 // 編集登録
-Route::post('/product/update','ProductController@registUpdate')->name('update');
+Route::post('/product/update','ProductController@exeUpdate')->name('update');

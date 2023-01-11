@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <h1>Post Form</h1>
-            <form action="{{route('submit')}}" method="post" onSubmit="return checkSubmit()">
+            <form action="{{route('submit')}}" method="POST" onSubmit="return checkSubmit()">
                 @csrf
 
                 <div class="form-group">
