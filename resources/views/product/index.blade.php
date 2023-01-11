@@ -10,7 +10,7 @@
         {{session('err_msg')}}
       </p>
       @endif
-    <a class="nav-item nav-link" href="{{route('regist')}}">新規追加</a>
+    <a class="nav-item nav-link" href="{{route('create')}}">新規追加</a>
       <table>
     <thead>
         <tr>

@@ -18,10 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/list', 'ProductController@showList')->name('Products');
+//商品一覧画面
+Route::get('/index', 'ProductController@showIndex')->name('Products');
 
 // 商品登録画面表示
-Route::get('/regist','ProductController@showRegist')->name('regist');
+Route::get('/create','ProductController@showCreate')->name('create');
 
 //商品登録
 Route::post('/submit','ProductController@exeSubmit')->name('submit');
