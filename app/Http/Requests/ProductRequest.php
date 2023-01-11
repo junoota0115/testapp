@@ -24,11 +24,28 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'product_name' => 'required',
+            'product_name' => 'required|max:100',
             'price' => 'required',
             'stock' => 'required',
+            'comment' => 'max:10000',
         ];
     }
+
+    /**
+ * 項目名
+ *
+ * @return array
+ */
+public function attributes()
+{
+    return [
+        'product_name' => '商品名',
+        'price' => '金額',
+        'stock' => '在庫',
+        'comment' => 'コメント'
+    ];
+}
+
     /**
      * エラーメッセージ
      *
@@ -40,6 +57,7 @@ class ProductRequest extends FormRequest
             'product_name.max' => ':attributeは:max字以内で入力してください。',
             'price.required' => ':attributeは必須項目です',
             'stock.required' => ':attributeは必須項目です',
+            'comment.max' => ':attributeは:max字以内で入力してください。',
         ];
     }
 

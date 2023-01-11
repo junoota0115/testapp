@@ -7,20 +7,24 @@ use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
-    public function getList(){
-        //productsテーブルからデータを取得
-        $products = DB::table('products')->get();
+    // テーブル名
+    protected $table = 'products';
+    protected $fillable = ['product_name','price','stock','comment'];
 
-        return $products;
-    }
+    // public function getList(){
+    //     //productsテーブルからデータを取得
+    //     $products = DB::table('products')->get();
 
-    public function registProduct($date){
-        //登録処理
-        DB::table('products')->insert([
-            'product_name'=> $date->product_name,
-            'price'=> $date->price,
-            'stock'=> $date->stock,
-            'comment'=> $date->comment,
-        ]);
-    }
+    //     return $products;
+    // }
+
+    // public function registProduct($date){
+    //     //登録処理
+    //     DB::table('products')->insert([
+    //         'product_name'=> $date->product_name,
+    //         'price'=> $date->price,
+    //         'stock'=> $date->stock,
+    //         'comment'=> $date->comment,
+    //     ]);
+    // }
 }

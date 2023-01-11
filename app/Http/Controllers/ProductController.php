@@ -14,23 +14,12 @@ class ProductController extends Controller
      * 
      * @return view
      */
-    public function showList(){
+    public function showIndex(){
         $products = Product::all();
-        return view ('product.list',['products' => $products]);
+        return view ('product.index',['products' => $products]);
     }
 
 
-    // /**
-    //  * 商品一覧表示
-    //  * 
-    //  * @return view
-    //  */
-    // public function showList(){
-    //     //インスタンス生成
-    //     $model = new Product();
-    //     $products = $model->getList();
-    //     return view('product.list',['products'=>$products]);
-    // }
     
     /**
      * 商品詳細表示
@@ -48,40 +37,61 @@ class ProductController extends Controller
     }
 
 
-        //商品登録画面表示
-    public function showRegistForm(){
-        return view('product.regist');
+    /**===========================
+     * 商品登録画面表示
+     * 
+     * @return view
+     */
+    public function showCreate(){
+        return view('product.create');
     }
 
-    public function registSubmit(ProductRequest $request) {
-        //トランザクション開始
-        DB::beginTransaction();
+      /**===========================
+     * 商品を登録する
+     * 
+     * @return view
+     */
+    public function exeSubmit(ProductRequest $request) {
+        //商品データの受け取り
+        $inputs = $request->all();
 
+        \DB::beginTransaction();
         try{
-            //登録で処理呼び出し
-            $product = new Product();
-            $product->registProduct($request);
-            DB::commit();
-        }catch(\Exception $e){
-            DB::rollback();
-            return back();
+            //商品登録
+            Product::create($inputs);
+            \DB::commit();
+        }catch(\Throwable $e){
+            \DB::rollback();
+            abort(500);
         }
-        // 処理が完了したらregistにリダイレクト
-        return redirect(route('Products'));
-    }
+        \Session::flash('err_msg', '商品を登録しました');
+         // 処理が完了したらlistにリダイレクト
+         return redirect(route('Products'));
+     }
 
 
-    // public function registSubmit(Request $request){
-    //     //商品データを受け取る
-    //     $inputs = ($request->all());
-    //     //商品の登録
-    //     Product::regist($inputs);
-    //     \Session::flash('err_msg','登録が完了しました。');
-    //     return redirect(route('products'));
+
+    //     //商品データの受け取り
+    //     $inputs = $request->all();
+        
+    //     //トランザクション開始
+    //     \DB::beginTransaction();
+    //     try{
+    //     //商品登録で処理呼び出し
+    //         Product::submit($inputs);
+    //         \DB::commit();
+    //     }catch(\Throwable $e){
+    //         \DB::rollback();
+    //         abort(500);
+    //     }
+
+    //     \Session::flash('err_msg', '商品を登録しました');
+    //     // 処理が完了したらlistにリダイレクト
+    //     return redirect(route('Products'));
     // }
     
 
-    /**
+    /**===========================
      * 商品編集画面表示
      * @param int $id
      * @return view
@@ -96,7 +106,7 @@ class ProductController extends Controller
         return view ('product.edit',['product' => $product]);
     }
 
-    //更新登録
+    //更新登録===========================
     public function registUpdate(ProductRequest $request) {
         $inputs = $request->all();
 
