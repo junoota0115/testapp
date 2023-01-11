@@ -107,7 +107,7 @@ class ProductController extends Controller
     }
 
     //更新登録===========================
-    public function registUpdate(ProductRequest $request) {
+    public function exeUpdate(ProductRequest $request) {
         $inputs = $request->all();
 
         //トランザクション開始
