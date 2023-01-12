@@ -58,7 +58,8 @@ class ProductController extends Controller
         $image = $request->file('img_path');
 
         if($request->hasFile('img_path')){
-            $path = \Storage::put('/public',$image);
+            $path = $image->store('public');
+            // $path = \Storage::put('/public',$image);
             $path = explode('/',$path);
         }else{
             $path = null;
@@ -148,7 +149,7 @@ class ProductController extends Controller
      * @param int $id
      * @return view
      */
-    public function exeDelete($id){
+    public function showDelete($id){
         
         if (empty($id)){
             \Session::flash('err_msg','データがありません');

@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <h1>Post Form</h1>
-            <form action="{{route('submit')}}" method="POST" enctype="multipart/form-date" onSubmit="return checkSubmit()">
+            <form action="{{route('submit')}}" method="POST" enctype="multipart/form-data" onSubmit="return checkSubmit()">
                 @csrf
 
 
