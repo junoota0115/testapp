@@ -9,6 +9,7 @@
             <form action="{{route('submit')}}" method="POST" enctype="multipart/form-date" onSubmit="return checkSubmit()">
                 @csrf
 
+
                 <div class="form-group">
                     <label for="product_name">商品名</label>
                     <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Product_name" value="{{ old('product_name') }}">
