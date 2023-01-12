@@ -58,8 +58,8 @@ class ProductController extends Controller
         $image = $request->file('img_path');
 
         if($request->hasFile('img_path')){
-            $path = $image->store('public');
-            // $path = \Storage::put('/public',$image);
+            // $path = $image->store('public');
+            $path = \Storage::put('/public',$image);
             $path = explode('/',$path);
         }else{
             $path = null;

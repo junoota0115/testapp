@@ -27,8 +27,7 @@
             <td>{{ $product->id }}</td>
             <td><a href="/testapp/public/product/{{$product->id }}">{{ $product->product_name }}</a></td>
             <td>{{ $product->price }}</td>
-            <td><button type="button" class="btn btn-primary" onclick="location.href='/testapp/public/product/edit/{{$product->id }}'">編集</button></td>
-            
+
             <td><a href="{{route('delete',$product->id)}}" class="btn btn-primary" onclick=>削除</a></td>
         </tr>
     @endforeach
