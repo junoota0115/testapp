@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <h1>Edit Form</h1>
-            <form action="{{route('update')}}" method="post" onSubmit="return checkSubmit()">
+            <form action="{{route('update')}}" method="post" enctype="multipart/form-date" onSubmit="return checkSubmit()">
                 @csrf
 <input type="hidden" name="id" value="{{$product->id}}">
                 <div class="form-group">
@@ -39,6 +39,11 @@
                     @if($errors->has('comment'))
                     <p>{{$errors->first('comment')}}</p>
                     @endif
+                </div>
+
+                <div class="form-group">
+                    <label for="img_path">画像保存</label>
+                    <input type="file" class="form-control-file" id="img_path" name="img_path" >
                 </div>
 
                     <a class="btn btn-secondary" href="{{route('Products')}}">キャンセル</a>
