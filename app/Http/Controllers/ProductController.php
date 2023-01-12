@@ -54,6 +54,14 @@ class ProductController extends Controller
     public function exeSubmit(ProductRequest $request) {
         //商品データの受け取り
         $inputs = $request->all();
+        $image = $request->file('img_path');
+
+        if($request->hasFile('img_path')){
+            $path = \Storage::put('/public',$image);
+            $path = explode('/',$path);
+        }else{
+            $path = null;
+        }
 
         \DB::beginTransaction();
         try{

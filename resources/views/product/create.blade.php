@@ -6,8 +6,9 @@
     <div class="container">
         <div class="row">
             <h1>Post Form</h1>
-            <form action="{{route('submit')}}" method="POST" onSubmit="return checkSubmit()">
+            <form action="{{route('submit')}}" method="POST" enctype="multipart/form-date" onSubmit="return checkSubmit()">
                 @csrf
+
 
                 <div class="form-group">
                     <label for="product_name">商品名</label>
@@ -36,6 +37,11 @@
                 <div class="form-group">
                     <label for="comment">コメント</label>
                     <textarea class="form-control" id="comment" name="comment" placeholder="Comment"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="img_path">画像保存</label>
+                    <input type="file" class="form-control-file" id="img_path" name="img_path" >
                 </div>
 
                     <a class="btn btn-secondary" href="{{route('Products')}}">キャンセル</a>
