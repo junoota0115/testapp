@@ -36,8 +36,8 @@ class ProductController extends Controller
         return view ('product.detail',['product' => $product]);
     }
 
-
-    /**===========================
+    /*===========================*/
+    /**
      * 商品登録画面表示
      * 
      * @return view
@@ -46,7 +46,8 @@ class ProductController extends Controller
         return view('product.create');
     }
 
-      /**===========================
+    /*===========================*/
+      /**
      * 商品を登録する
      * 
      * @return view
@@ -90,8 +91,8 @@ class ProductController extends Controller
     //     return redirect(route('Products'));
     // }
     
-
-    /**===========================
+/*===========================*/
+    /**
      * 商品編集画面表示
      * @param int $id
      * @return view
@@ -130,6 +131,29 @@ class ProductController extends Controller
         }
         // 処理が完了したらregistにリダイレクト
         \Session::flash('err_msg','更新しました。');
+        return redirect(route('Products'));
+    }
+
+    /*===========================*/
+    /**
+     * 商品削除
+     * @param int $id
+     * @return view
+     */
+    public function exeDelete($id){
+        
+        if (empty($id)){
+            \Session::flash('err_msg','データがありません');
+            return redirect(route('Products'));
+        }
+        try{
+            //商品削除
+            Product::destroy($id);
+        }catch(\Throwable $e){
+            abort(500);
+        }
+
+        \Session::flash('err_msg','データを削除しました');
         return redirect(route('Products'));
     }
 }
