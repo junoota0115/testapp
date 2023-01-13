@@ -16,6 +16,16 @@ class ProductController extends Controller
      */
     public function showIndex(){
         $products = Product::all();
+        $products = Product::orderBy('created_at', 'asc')->where(function ($query) {
+
+            // 検索機能
+            if ($search = request('search')) {
+                $query->where('product_name', 'LIKE', "%{$search}%");
+            }
+
+            
+        })->paginate(20);
+
         return view ('product.index',['products' => $products]);
     }
 
