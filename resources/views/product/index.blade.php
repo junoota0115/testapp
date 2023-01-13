@@ -5,6 +5,13 @@
 <div class="row">
   <div class="col-md-10 col-md-offset-2">
     <h2>ブログ記事一覧</h2>
+    <form class="form-inline my-2 my-lg-0 ml-2">
+      <div class="form-group">
+      <input type="search" class="form-control mr-sm-2" name="search"  value="{{request('search')}}" placeholder="キーワードを入力" aria-label="検索...">
+      </div>
+      <input type="submit" value="検索" class="btn btn-info">
+  </form>
+
     @if(session('err_msg'))
       <p class="text-anger">
         {{session('err_msg')}}
