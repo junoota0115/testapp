@@ -14,7 +14,8 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <div>You are logged in!</div>
+                    <a class="btn btn-secondary" href="{{route('Products')}}">商品一覧へ</a>
                 </div>
             </div>
         </div>
