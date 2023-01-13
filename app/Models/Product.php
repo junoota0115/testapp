@@ -9,7 +9,7 @@ class Product extends Model
 {
     // テーブル名
     protected $table = 'products';
-    protected $fillable = ['product_name','price','stock','comment','img_path'];
+    protected $fillable = ['company_id','product_name','price','stock','comment','img_path'];
 
     // public function getList(){
     //     //productsテーブルからデータを取得

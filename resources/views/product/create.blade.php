@@ -35,6 +35,15 @@
                 </div>
 
                 <div class="form-group">
+                <label for="company_id">会社名</label>
+                <select class="form-control" name="company_id">
+                <option value="0">A社</option>
+                <option value="1">B社</option>
+                <option value="2">C社</option>
+                </select>
+                </div>
+
+                <div class="form-group">
                     <label for="comment">コメント</label>
                     <textarea class="form-control" id="comment" name="comment" placeholder="Comment"></textarea>
                 </div>
