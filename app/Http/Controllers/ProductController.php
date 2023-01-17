@@ -38,7 +38,6 @@ class ProductController extends Controller
      */
     public function showDetail($id){
         $product = Product::find($id);
-
         if (is_null($product)){
             \Session::flash('err_msg','データがありません');
             return redirect(route('Products'));
@@ -65,16 +64,24 @@ class ProductController extends Controller
     public function exeSubmit(ProductRequest $request) {
         //商品データの受け取り
         $inputs = $request->all();
-        $image = $request->file('img_path');
 
-        if($request->hasFile('img_path')){
-            // $path = $image->store('public');
-            $path = \Storage::put('/public',$image);
-            $path = explode('/',$path);
-        }else{
-            $path = null;
+        if(isset($inputs['img_path'])){
+            $file = $request->file('img_path');
+            $extension = $file->getClientOriginalName();
+            $inputs['img_path'] = $extension;
+            $file->move('storage',$extension);
         }
 
+        // $image = $request->file('img_path');
+        
+        // if($request->hasFile('img_path')){
+        //     $path = $image->store('public');
+        //     $request->img_path=$path;
+        //     // $path = \Storage::put('/public',$image);
+        //     $path = explode('/',$path);
+        // }else{
+        //     $path = null;
+        // }
         \DB::beginTransaction();
         try{
             //商品登録

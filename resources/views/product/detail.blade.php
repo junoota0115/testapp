@@ -4,7 +4,11 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
   <tr>
-  <img src="{{ '/storage/' . $product['img_path']}}" class='w-100 mb-3'/>
+  @if ($product->img_path !=='')
+  <div><img src="{{asset('/storage/'.$product->img_path)}}" width="100" height="100"/></div>
+  @else
+<div><img src="{{asset('storage/no_image.png')}}" width="100" height="100"></div>
+  @endif
 
   <td>{{ $product->id}}</td>
   <td>社名:{{
