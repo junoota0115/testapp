@@ -34,6 +34,15 @@
                 </div>
 
                 <div class="form-group">
+                <label for="company_id">会社名</label>
+                <select class="form-control" name="company_id">
+                <option value="A社">A社</option>
+                <option value="B社">B社</option>
+                <option value="C社">C社</option>
+                </select>
+                </div>
+
+                <div class="form-group">
                     <label for="comment">コメント</label>
                     <textarea class="form-control" id="comment" name="comment" placeholder="Comment" >{{ $product->comment }}</textarea>
                     @if($errors->has('comment'))
@@ -43,7 +52,7 @@
 
                 <div class="form-group">
                     <label for="img_path">画像保存</label>
-                    <input type="file" class="form-control-file" id="img_path" name="img_path" >
+                    <input type="file" class="form-control-file" id="img_path" name="img_path" value="{{ $product->img_path }}">
                 </div>
 
                     <a class="btn btn-secondary" href="{{route('Products')}}">キャンセル</a>

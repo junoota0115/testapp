@@ -144,10 +144,11 @@ class ProductController extends Controller
             //登録で処理呼び出し
             $product = Product::find($inputs['id']);
             $product->fill([
+                'company_id' => $inputs['company_id'],
                 'product_name' => $inputs['product_name'],
                 'price' => $inputs['price'],
                 'stock' => $inputs['stock'],
-                'comment' => $inputs['comment'],
+                'img_path' => $inputs['img_path'],
             ]);
             $product->save();
             DB::commit();
