@@ -54,6 +54,15 @@ public function getSubmit(ProductRequest $request){
         $file->move('storage',$extension);
     }
     \DB::beginTransaction();
+    try{
+        //商品登録
+        Product::create($inputs);
+        \DB::commit();
+    }catch(\Throwable $e){
+        \DB::rollback();
+        abort(500);
+    }
+    \Session::flash('err_msg', '商品を登録しました');
     }
 
     //商品編集画面表示
@@ -69,10 +78,12 @@ public function getSubmit(ProductRequest $request){
 
     //商品編集
     public function getUpdate(ProductRequest $request) {
-            $inputs = $request->all();
+        $inputs = $request->all();
+
+        //トランザクション開始
+        DB::beginTransaction();
     
-            //トランザクション開始
-            DB::beginTransaction();
+        try{
             //登録で処理呼び出し
             $product = Product::find($inputs['id']);
             $product->fill([
@@ -80,9 +91,17 @@ public function getSubmit(ProductRequest $request){
                 'product_name' => $inputs['product_name'],
                 'price' => $inputs['price'],
                 'stock' => $inputs['stock'],
+                'comment' => $inputs['comment'],
                 'img_path' => $inputs['img_path'],
             ]);
             $product->save();
+            DB::commit();
+        }catch(\Throwable $e){
+            \DB::rollback();
+            abort(500);
+        }
+        // 処理が完了したらregistにリダイレクト
+        \Session::flash('err_msg','更新しました。');
     }
 
     //商品削除

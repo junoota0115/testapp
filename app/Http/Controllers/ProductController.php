@@ -21,7 +21,6 @@ class ProductController extends Controller
         return view ('product.index',['products' => $products]);
     }
 
-
     
     /**
      * 商品詳細表示
@@ -56,16 +55,6 @@ class ProductController extends Controller
         $product_model = new Product();
         $products = $product_model->getSubmit($request);
 
-        try{
-            //商品登録
-            Product::create($inputs);
-            \DB::commit();
-        }catch(\Throwable $e){
-            \DB::rollback();
-            abort(500);
-        }
-        \Session::flash('err_msg', '商品を登録しました');
-         // 処理が完了したらlistにリダイレクト
          return redirect(route('Products'));
      }
     
@@ -82,24 +71,12 @@ class ProductController extends Controller
         return view ('product.edit',['product' => $product]);
     }
 
-    //更新登録===========================
-    public function exeUpdate(ProductRequest $request) {
-        // $inputs = $request->all();
-
-        // //トランザクション開始
-        // DB::beginTransaction();
-        $product_model = new Product();
-        $product_model->getEdit($request);
-        try{
-            DB::commit();
-        }catch(\Throwable $e){
-            \DB::rollback();
-            abort(500);
-        }
-        // 処理が完了したらregistにリダイレクト
-        \Session::flash('err_msg','更新しました。');
-        return redirect(route('Products'));
-    }
+//更新登録===========================
+public function exeUpdate(ProductRequest $request) {
+    $product_model = new Product();
+    $products = $product_model->getUpdate($request);
+    return redirect(route('Products'));
+}
 
     /*===========================*/
     /**
