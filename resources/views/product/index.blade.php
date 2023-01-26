@@ -33,6 +33,7 @@
     <tbody>
     @foreach ($products as $product)
         <tr>
+        
             <td>{{ $product->id }}</td>
             <td><a href="/testapp/public/product/{{$product->id }}">{{ $product->product_name }}</a></td>
             <td>{{ $product->price }}</td>
