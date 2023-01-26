@@ -55,15 +55,7 @@ class ProductController extends Controller
         //商品データの受け取り
         $product_model = new Product();
         $products = $product_model->getSubmit($request);
-        // $inputs = $request->all();
 
-        // if(isset($inputs['img_path'])){
-        //     $file = $request->file('img_path');
-        //     $extension = $file->getClientOriginalName();
-        //     $inputs['img_path'] = $extension;
-        //     $file->move('storage',$extension);
-        // }
-        \DB::beginTransaction();
         try{
             //商品登録
             Product::create($inputs);
@@ -76,27 +68,6 @@ class ProductController extends Controller
          // 処理が完了したらlistにリダイレクト
          return redirect(route('Products'));
      }
-
-
-
-    //     //商品データの受け取り
-    //     $inputs = $request->all();
-        
-    //     //トランザクション開始
-    //     \DB::beginTransaction();
-    //     try{
-    //     //商品登録で処理呼び出し
-    //         Product::submit($inputs);
-    //         \DB::commit();
-    //     }catch(\Throwable $e){
-    //         \DB::rollback();
-    //         abort(500);
-    //     }
-
-    //     \Session::flash('err_msg', '商品を登録しました');
-    //     // 処理が完了したらlistにリダイレクト
-    //     return redirect(route('Products'));
-    // }
     
 /*===========================*/
     /**
@@ -105,33 +76,21 @@ class ProductController extends Controller
      * @return view
      */
     public function showEdit($id){
-        $product = Product::find($id);
+        $product_model = new Product();
+        $product = $product_model->getEdit($id);
 
-        if (is_null($product)){
-            \Session::flash('err_msg','データがありません');
-            return redirect(route('Products'));
-        }
         return view ('product.edit',['product' => $product]);
     }
 
     //更新登録===========================
     public function exeUpdate(ProductRequest $request) {
-        $inputs = $request->all();
+        // $inputs = $request->all();
 
-        //トランザクション開始
-        DB::beginTransaction();
-
+        // //トランザクション開始
+        // DB::beginTransaction();
+        $product_model = new Product();
+        $product_model->getEdit($request);
         try{
-            //登録で処理呼び出し
-            $product = Product::find($inputs['id']);
-            $product->fill([
-                'company_id' => $inputs['company_id'],
-                'product_name' => $inputs['product_name'],
-                'price' => $inputs['price'],
-                'stock' => $inputs['stock'],
-                'img_path' => $inputs['img_path'],
-            ]);
-            $product->save();
             DB::commit();
         }catch(\Throwable $e){
             \DB::rollback();
@@ -149,11 +108,8 @@ class ProductController extends Controller
      * @return view
      */
     public function showDelete($id){
-        
-        if (empty($id)){
-            \Session::flash('err_msg','データがありません');
-            return redirect(route('Products'));
-        }
+        $product_model = new Product();
+        $product_model->getEdit($id);
         try{
             //商品削除
             Product::destroy($id);
