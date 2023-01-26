@@ -14,18 +14,10 @@ class ProductController extends Controller
      * 
      * @return view
      */
-    public function showIndex(){
-        $products = Product::all();
-        $products = Product::orderBy('created_at', 'asc')->where(function ($query) {
-
-            // 検索機能
-            if ($search = request('search')) {
-                $query->where('product_name', 'LIKE', "%{$search}%");
-            }
-
-            
-        })->paginate(20);
-
+    public function showIndex(?String  $product_name = null ){
+        $product_model = new Product();
+        $products = $product_model->getList($product_name);
+  
         return view ('product.index',['products' => $products]);
     }
 
@@ -37,11 +29,9 @@ class ProductController extends Controller
      * @return view
      */
     public function showDetail($id){
-        $product = Product::find($id);
-        if (is_null($product)){
-            \Session::flash('err_msg','データがありません');
-            return redirect(route('Products'));
-        }
+        $product_model = new Product();
+        $product = $product_model->getDetail($id);
+
         return view ('product.detail',['product' => $product]);
     }
 
@@ -63,24 +53,15 @@ class ProductController extends Controller
      */
     public function exeSubmit(ProductRequest $request) {
         //商品データの受け取り
-        $inputs = $request->all();
+        $product_model = new Product();
+        $products = $product_model->getSubmit($request);
+        // $inputs = $request->all();
 
-        if(isset($inputs['img_path'])){
-            $file = $request->file('img_path');
-            $extension = $file->getClientOriginalName();
-            $inputs['img_path'] = $extension;
-            $file->move('storage',$extension);
-        }
-
-        // $image = $request->file('img_path');
-        
-        // if($request->hasFile('img_path')){
-        //     $path = $image->store('public');
-        //     $request->img_path=$path;
-        //     // $path = \Storage::put('/public',$image);
-        //     $path = explode('/',$path);
-        // }else{
-        //     $path = null;
+        // if(isset($inputs['img_path'])){
+        //     $file = $request->file('img_path');
+        //     $extension = $file->getClientOriginalName();
+        //     $inputs['img_path'] = $extension;
+        //     $file->move('storage',$extension);
         // }
         \DB::beginTransaction();
         try{
