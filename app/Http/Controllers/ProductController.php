@@ -20,8 +20,7 @@ class ProductController extends Controller
   
         return view ('product.index',['products' => $products]);
     }
-
-    
+    /*===========================*/
     /**
      * 商品詳細表示
      * @param int $id
@@ -33,7 +32,6 @@ class ProductController extends Controller
 
         return view ('product.detail',['product' => $product]);
     }
-
     /*===========================*/
     /**
      * 商品登録画面表示
@@ -43,7 +41,6 @@ class ProductController extends Controller
     public function showCreate(){
         return view('product.create');
     }
-
     /*===========================*/
       /**
      * 商品を登録する
@@ -71,13 +68,15 @@ class ProductController extends Controller
         return view ('product.edit',['product' => $product]);
     }
 
-//更新登録===========================
-public function exeUpdate(ProductRequest $request) {
-    $product_model = new Product();
-    $products = $product_model->getUpdate($request);
+   //===========================
+   /**
+    * 更新登録
+    */
+    public function exeUpdate(ProductRequest $request) {
+        $product_model = new Product();
+        $products = $product_model->getUpdate($request);
     return redirect(route('Products'));
 }
-
     /*===========================*/
     /**
      * 商品削除
