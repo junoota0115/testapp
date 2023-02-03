@@ -86,14 +86,7 @@ class ProductController extends Controller
     public function showDelete($id){
         $product_model = new Product();
         $product_model->getEdit($id);
-        try{
-            //商品削除
-            Product::destroy($id);
-        }catch(\Throwable $e){
-            abort(500);
-        }
 
-        \Session::flash('err_msg','データを削除しました');
         return redirect(route('Products'));
     }
 }
