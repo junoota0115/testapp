@@ -8,6 +8,8 @@
     <form class="form-inline my-2 my-lg-0 ml-2">
       <div class="form-group">
       <input type="search" class="form-control mr-sm-2" name="search"  value="{{request('search')}}" placeholder="商品名を入力" aria-label="検索...">
+      <input type="text" class="form-control mr-sm-2" name="upper"  value="{{request('upper')}}" placeholder="上限金額を入力" aria-label="検索...">
+      <input type="text" class="form-control mr-sm-2" name="lower"  value="{{request('lower')}}" placeholder="下限金額を入力" aria-label="検索...">
       </div>
       <input type="submit" value="検索" class="btn btn-info">
   </form>

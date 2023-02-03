@@ -17,6 +17,7 @@ class ProductController extends Controller
     public function showIndex(?String  $product_name = null ){
         $product_model = new Product();
         $products = $product_model->getList($product_name);
+        
   
         return view ('product.index',['products' => $products]);
     }
