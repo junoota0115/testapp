@@ -12,10 +12,9 @@ window.onload = function () {
       return false;
     } //ガード節で検索ワードが空の時、ここで処理を止めて何もビューに出さない
     
-    console.log("成功");
     $.ajax({
       type: 'GET',
-      url: '/product/index/' , //後述するweb.phpのURLと同じ形にする
+      url: '/' , //後述するweb.phpのURLと同じ形にする
       data: {
         'search': searchWord, //ここはサーバーに贈りたい情報。今回は検索ファームのバリューを送りたい。
       },
@@ -33,14 +32,16 @@ window.onload = function () {
       $.each(data, function (index, value) { //dataの中身からvalueを取り出す
         //ここの記述はリファクタ可能
         let id = value.id;
-        let product_name = value.product_name;
-        let price = value.price;
+        let name = value.name;
+        let avatar = value.avatar;
+        let itemsCount = value.items_count;
         // １ユーザー情報のビューテンプレートを作成
         html = `
-        <tr class="product-list">
-        <td class="col-xs-3">${product_name}</td>
-        <td class="col-xs-2">${price}</td>
-        <td class="col-xs-5"><a class="btn btn-info" href="/product/${id}">詳細</a></td>
+        <tr class="user-list">
+        <td class="col-xs-2"><img src="${avatar}" class="rounded-circle user-avatar"></td> 
+        <td class="col-xs-3">${name}</td>
+        <td class="col-xs-2">${itemsCount}</td>
+        <td class="col-xs-5"><a class="btn btn-info" href="/user/${id}">詳細</a></td>
         </tr>
         `
       })
@@ -54,5 +55,5 @@ window.onload = function () {
       //ajax通信がエラーのときの処理
       alert('通信エラー！');
     })
-  })
+  } )
 }

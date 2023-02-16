@@ -22,6 +22,10 @@ class ProductController extends Controller
         return view ('product.index',['products' => $products]);
     }
     /*===========================*/
+    public function search(){
+
+    }
+    /*===========================*/
     /**
      * 商品詳細表示
      * @param int $id
