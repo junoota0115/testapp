@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ProductRequest;
@@ -21,12 +22,21 @@ class Product extends Model
     
 //商品一覧表示
 public function getList(){
+
         $products = Product::all();
         $products = Product::orderBy('created_at', 'asc')->where(function ($query) {
-
+        
             // 検索機能
             if ($search = request('search')) {
                 $query->where('product_name', 'LIKE', "%{$search}%");
+            }
+
+            if($upper = request('upper')){
+                $query->where('price','>=',$upper);
+            }
+
+            if($lower = request('lower')){
+                $query->where('price','<=',$lower);
             }
             
         })->paginate(20);
