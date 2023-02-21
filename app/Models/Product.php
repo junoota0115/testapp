@@ -43,6 +43,12 @@ public function getList(){
         return $products;
 }
 
+public function ajaxSearch(Request $request){
+    $products = Product::where('product_name','like',"%{$request->search}%")
+->orwhere('price','like',"%($request->search)%")
+->paginate(5);
+}
+
 //商品詳細表示
 public function getDetail($id){
      $product = Product::find($id);
