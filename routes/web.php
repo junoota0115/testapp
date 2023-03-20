@@ -21,6 +21,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'ProductController@showIndex')->name('Products');
 Auth::routes();
 
+//検索機能
+Route::get('/search', 'ProductController@ajaxSearch')->name('search');
+
 // 商品登録画面表示
 Route::get('/create','ProductController@showCreate')->name('create')->middleware('auth');
 

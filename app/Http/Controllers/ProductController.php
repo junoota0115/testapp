@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
-    /**
+    /**==========================
      * 商品一覧表示
      * 
      * @return view
@@ -17,14 +17,21 @@ class ProductController extends Controller
     public function showIndex(?String  $product_name = null ){
         $product_model = new Product();
         $products = $product_model->getList($product_name);
+        // dd($products);
         
   
         return view ('product.index',['products' => $products]);
     }
-    /*===========================*/
-    public function search(){
+    /*===========================
+    検索機能サーチ*/
 
+    public function ajaxSearch(Request $request){
+        $products = Product::where('product_name','like',"%{$request->search}%")->get();
+        // ->orwhere('price','like',"%($request->search)%");
+    return response()->json($products);
     }
+
+    
     /*===========================*/
     /**
      * 商品詳細表示
@@ -60,7 +67,7 @@ class ProductController extends Controller
          return redirect(route('Products'));
      }
     
-/*===========================*/
+    /*===========================*/
     /**
      * 商品編集画面表示
      * @param int $id

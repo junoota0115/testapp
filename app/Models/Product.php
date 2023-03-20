@@ -43,6 +43,8 @@ public function getList(){
         return $products;
 }
 
+
+
 //商品詳細表示
 public function getDetail($id){
      $product = Product::find($id);
@@ -56,13 +58,15 @@ public function getDetail($id){
     //商品登録
 public function getSubmit(ProductRequest $request){
     $inputs = $request->all();
-    
+    // dd($inputs);
     if(isset($inputs['img_path'])){
         $file = $request->file('img_path');
         $extension = $file->getClientOriginalName();
         $inputs['img_path'] = $extension;
         $file->move('storage',$extension);
     }
+
+    
     \DB::beginTransaction();
     try{
         //商品登録
