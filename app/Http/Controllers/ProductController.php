@@ -26,8 +26,17 @@ class ProductController extends Controller
     検索機能サーチ*/
 
     public function ajaxSearch(Request $request){
+        if($search = request('search')){
         $products = Product::where('product_name','like',"%{$request->search}%")->get();
-        // ->orwhere('price','like',"%($request->search)%");
+        }
+        if($upper = request('upper')){
+            $products = Product::where('price','>=',$upper)->get();
+        }
+        if($lower = request('lower')){
+            $products = Product::where('price','<=',$lower)->get();
+        }
+    
+        // ->orwhere('price','like',"%{$request->search}%")->get();
     return response()->json($products);
     }
 
