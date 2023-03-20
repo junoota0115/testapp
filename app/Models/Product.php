@@ -43,11 +43,7 @@ public function getList(){
         return $products;
 }
 
-public function ajaxSearch(Request $request){
-    $products = Product::where('product_name','like',"%{$request->search}%")
-->orwhere('price','like',"%($request->search)%")
-->paginate(5);
-}
+
 
 //商品詳細表示
 public function getDetail($id){
@@ -62,13 +58,15 @@ public function getDetail($id){
     //商品登録
 public function getSubmit(ProductRequest $request){
     $inputs = $request->all();
-    
+    // dd($inputs);
     if(isset($inputs['img_path'])){
         $file = $request->file('img_path');
         $extension = $file->getClientOriginalName();
         $inputs['img_path'] = $extension;
         $file->move('storage',$extension);
     }
+
+    
     \DB::beginTransaction();
     try{
         //商品登録

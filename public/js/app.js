@@ -49644,23 +49644,23 @@ module.exports = function(module) {
 /***/ (function(module, exports) {
 
 window.onload = function () {
-  var searchBtn = document.getElementById('submit');
-  searchBtn.addEventListener('click', function () {
+  $('.btn .button').on('click', function () {
+    $('#index').empty();
     // $('.table tbody').empty(); //もともとある要素を空にする $('').empty();
     // $('.search-null').remove(); //検索結果が0のときのテキストを消す$('').remove();
 
-    var searchWord = $('#search[name=search]').val(); //検索ワードを取得
-    console.log(searchWord);
+    var searchWord = $('#search').val(); //検索ワードを取得
+
     if (!searchWord) {
       return false;
-    } //ガード節で検索ワードが空の時、ここで処理を止めて何もビューに出さない
+    } //検索ワードが空の時、ここで処理を止めて何もビューに出さない
 
     $.ajax({
       type: 'GET',
       url: '/',
-      //後述するweb.phpのURLと同じ形にする
+      //web.phpのURLと同じ
       data: {
-        'search': searchWord //ここはサーバーに贈りたい情報。今回は検索ファームのバリューを送りたい。
+        'search': searchWord //ここはサーバーに贈りたい検索ファームのバリュー。
       },
 
       dataType: 'json',
@@ -49668,30 +49668,31 @@ window.onload = function () {
       timeout: 3000,
       beforeSend: function beforeSend() {
         $('.loading').removeClass('display-none');
-      } //通信中の処理をここで記載。今回はぐるぐるさせるためにcssでスタイルを消す。
+      } //通信中の処理をここで記載。
     }).done(function (data) {
       //ajaxが成功したときの処理
+      console.log(data);
       $('.loading').addClass('display-none'); //通信中のぐるぐるを消す
 
       var html = '';
       $.each(data, function (index, value) {
         //dataの中身からvalueを取り出す
-        //ここの記述はリファクタ可能
         var id = value.id;
-        var name = value.name;
-        var avatar = value.avatar;
-        var itemsCount = value.items_count;
-        // １ユーザー情報のビューテンプレートを作成
-        html = "\n        <tr class=\"user-list\">\n        <td class=\"col-xs-2\"><img src=\"".concat(avatar, "\" class=\"rounded-circle user-avatar\"></td> \n        <td class=\"col-xs-3\">").concat(name, "</td>\n        <td class=\"col-xs-2\">").concat(itemsCount, "</td>\n        <td class=\"col-xs-5\"><a class=\"btn btn-info\" href=\"/user/").concat(id, "\">\u8A73\u7D30</a></td>\n        </tr>\n        ");
+        var product_name = value.product_name;
+        var price = value.price;
+        html = "\n        <tr class=\"product-list\">\n        <td class=\"col-xs-3\">".concat(product_name, "</td>\n        <td class=\"col-xs-2\">").concat(price, "</td>\n        <td class=\"col-xs-5\"><a class=\"btn btn-info\" href=\"/product/").concat(id, "\">\u8A73\u7D30</a></td>\n        </tr>\n        ");
       });
-      $('.user-table tbody').append(html); //できあがったテンプレートをビューに追加
+      $('.table tbody').append(html); //できあがったテンプレートをビューに追加
       // 検索結果がなかったときの処理
       if (data.length === 0) {
-        $('.user-index-wrapper').after('<p class="text-center mt-5 search-null">ユーザーが見つかりません</p>');
+        $('.index-wrapper').after('<p class="text-center mt-5 search-null">ユーザーが見つかりません</p>');
       }
-    }).fail(function () {
-      //ajax通信がエラーのときの処理
-      alert('通信エラー！');
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+      alert('ファイルの取得に失敗しました。');
+      console.log("ajax通信に失敗しました");
+      console.log(jqXHR.status);
+      console.log(textStatus);
+      console.log(errorThrown);
     });
   });
 };
