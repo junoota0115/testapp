@@ -23,7 +23,7 @@ window.onload = function () {
       
       
     }).done(function (data) { //ajaxが成功したときの処理
-      // console.log(data);
+      console.log(data);
       $('#index').empty(); 
 
       let html = '';
