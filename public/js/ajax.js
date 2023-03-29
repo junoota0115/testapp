@@ -6,24 +6,28 @@
 window.onload = function () {
   $('button').on('click',function(){
     
-    let searchWord = $('#search').val(); //検索ワードを取得
-    console.log(searchWord);
-    if (!searchWord) {
-      return false;
-    } //検索ワードが空の時、ここで処理を止める
-    
+    const searchWord = $('#search').val(); //検索ワードを取得
+    const searchUpper = $('#upper').val();
+    const searchLower = $('#lower').val();
+    const stockUpper = $('#stockUpper').val();
+    const stockLower = $('#stockLower').val();
+    console.log(stockUpper);
     $.ajax({
       type: 'GET',
-      url: '/testapp/public/search' , //ここのURLの意味がわからない
+      url: '/testapp/public/search' , //送りたいURL。ここのアクションが呼び出される
         data: {
-          'search': searchWord, //この書き方でsearchWordが送られているのか？
+          'search': searchWord, 
+          'upper': searchUpper, 
+          'lower': searchLower, 
+          'stockUpper': stockUpper, 
+          'stockLower': stockLower, 
         },
       dataType: 'json', //json形式で受け取る
       timeout: 3000,
       
       
     }).done(function (data) { //ajaxが成功したときの処理
-      console.log(data);
+      console.log(data);  
       $('#index').empty(); 
 
       let html = '';
@@ -31,18 +35,21 @@ window.onload = function () {
         let id = value.id;
         let product_name = value.product_name;
         let price = value.price;
+        let stock = value.stock;
         html = `
         <tr class="product-list">
         <td class="col-xs-3">${id}</td>
         <td class="col-xs-3">${product_name}</a></td>
         <td class="col-xs-3">${price}</td>
+        <td class="col-xs-3">${stock}</td>
         </tr>
         `;
         $('#index').append(html);
       });
 
       if (data.length === 0){//もし何もなければ
-        $('#index').after('<p class="text-center mt-5 search-null">検索結果はありません</p>');
+        // $('#index').after('<p class="text-center mt-5 search-null">検索結果はありません</p>');
+        alert("検索しましたがヒットしませんでした。");
       }
       
 

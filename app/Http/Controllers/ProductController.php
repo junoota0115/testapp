@@ -26,10 +26,43 @@ class ProductController extends Controller
     検索機能サーチ*/
 
     public function ajaxSearch(Request $request){
-        $products = Product::where('product_name','like',"%{$request->search}%")->get();
-        // ->orwhere('price','like',"%($request->search)%");
-    return response()->json($products);
-    }
+        $search = $request->input('search');
+        $upper = $request->input('upper');
+        $lower = $request->input('lower');
+        $stockUpper = $request->input('stockUpper');
+        $stockLower = $request->input('stockLower');
+        $query = Product::query();
+
+        if(!empty($search)){
+            $query->where('product_name','like',$search);
+        }
+        if(!empty($upper)){
+            $query->where('price','<=',$upper);
+        }
+        if(!empty($lower)){
+            $query->where('price','>=',$lower); 
+        }
+        if(!empty($stockUpper)){
+            $query->where('stock','<=',$stockUpper); 
+        }
+        if(!empty($stockLower)){
+            $query->where('stock','>=',$stockLower); 
+        }
+        $products = $query->get();
+
+        return response()->json($products);
+        }
+        // if($search = request('search')){
+        // $products = Product::where('product_name','like',"%{$request->search}%")->get();
+        // }
+        // if($upper = request('upper')){
+        //     $products = Product::where('price','>=',$upper)->get();
+        // }
+        // if($lower = request('lower')){
+        //     $products = Product::where('price','<=',$lower)->get();
+        // }
+    
+        // ->orwhere('price','like',"%{$request->search}%")->get();
 
     
     /*===========================*/
