@@ -29,8 +29,9 @@
     <thead>
         <tr>
             <th>ID </th>
-            <th>NAME </th>
-            <th>PRICE </th>
+            <th>商品名 </th>
+            <th>金額 </th>
+            <th>在庫 </th>
             <th></th>
             <th></th>
         </tr>
@@ -41,8 +42,8 @@
         
             <td>{{ $product->id }}</td>
             <td><a href="/testapp/public/product/{{$product->id }}">{{ $product->product_name }}</a></td>
-            <td>{{ $product->price }}</td>
-            <td>{{ $product->stock }}</td>
+            <td>¥{{ $product->price }}</td>
+            <td>{{ $product->stock }}個</td>
             @auth
             <td><a href="{{route('delete',$product->id)}}" class="btn btn-primary" onclick=>削除</a></td>
             @endauth
