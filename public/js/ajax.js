@@ -9,11 +9,8 @@ window.onload = function () {
     const searchWord = $('#search').val(); //検索ワードを取得
     const searchUpper = $('#upper').val();
     const searchLower = $('#lower').val();
-    console.log(searchLower);
-    if (!searchWord) {
-      alert("何も入力されていません");
-      return false;
-    } //検索ワードが空の時、ここで処理を止める
+    const stockUpper = $('#stockUpper').val();
+    const stockLower = $('#stockLower').val();
     
     $.ajax({
       type: 'GET',
@@ -22,6 +19,8 @@ window.onload = function () {
           'search': searchWord, 
           'upper': searchUpper, 
           'lower': searchLower, 
+          'stockUpper': stockUpper, 
+          'stockLower': stockLower, 
         },
       dataType: 'json', //json形式で受け取る
       timeout: 3000,

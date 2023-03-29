@@ -10,6 +10,8 @@
       <input type="search" class="form-control mr-sm-2" name="search" id="search" value="{{request('search')}}" placeholder="商品名を入力" aria-label="検索...">
       <input type="search" class="form-control mr-sm-2" name="upper" id="upper" value="{{request('upper')}}" placeholder="上限金額を入力" aria-label="検索...">
       <input type="search" class="form-control mr-sm-2" name="lower" id="lower" value="{{request('lower')}}" placeholder="下限金額を入力" aria-label="検索...">
+      <input type="search" class="form-control mr-sm-2" name="stockUpper" id="stockUpper" value="{{request('stockUpper')}}" placeholder="上限在庫を入力" aria-label="検索...">
+      <input type="search" class="form-control mr-sm-2" name="stockLower" id="stockLower" value="{{request('stockLower')}}" placeholder="下限在庫を入力" aria-label="検索...">
       </div>
       
 
