@@ -13,18 +13,17 @@
       <input type="search" class="form-control mr-sm-2" name="stockUpper" id="stockUpper" value="{{request('stockUpper')}}" placeholder="上限在庫を入力" aria-label="検索...">
       <input type="search" class="form-control mr-sm-2" name="stockLower" id="stockLower" value="{{request('stockLower')}}" placeholder="下限在庫を入力" aria-label="検索...">
       </div>
-      
 
       <button type="button" id="button"  class="btn btn-info" value="aaa" >ボタン</button>
   </form>
-
+<hr>
     @if(session('err_msg'))
       <p class="text-anger">
         {{session('err_msg')}}
       </p>
       @endif
       @auth
-    <a class="nav-item nav-link" href="{{route('create')}}">新規追加</a>
+    <div><a class="nav-item nav-link" href="{{route('create')}}">新規追加</a></div>
     @endauth
       <table>
     <thead>
@@ -43,6 +42,7 @@
             <td>{{ $product->id }}</td>
             <td><a href="/testapp/public/product/{{$product->id }}">{{ $product->product_name }}</a></td>
             <td>{{ $product->price }}</td>
+            <td>{{ $product->stock }}</td>
             @auth
             <td><a href="{{route('delete',$product->id)}}" class="btn btn-primary" onclick=>削除</a></td>
             @endauth

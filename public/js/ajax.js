@@ -11,7 +11,7 @@ window.onload = function () {
     const searchLower = $('#lower').val();
     const stockUpper = $('#stockUpper').val();
     const stockLower = $('#stockLower').val();
-    
+    console.log(stockUpper);
     $.ajax({
       type: 'GET',
       url: '/testapp/public/search' , //送りたいURL。ここのアクションが呼び出される
@@ -35,11 +35,13 @@ window.onload = function () {
         let id = value.id;
         let product_name = value.product_name;
         let price = value.price;
+        let stock = value.stock;
         html = `
         <tr class="product-list">
         <td class="col-xs-3">${id}</td>
         <td class="col-xs-3">${product_name}</a></td>
         <td class="col-xs-3">${price}</td>
+        <td class="col-xs-3">${stock}</td>
         </tr>
         `;
         $('#index').append(html);

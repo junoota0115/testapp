@@ -37,16 +37,16 @@ class ProductController extends Controller
             $query->where('product_name','like',$search);
         }
         if(!empty($upper)){
-            $query->where('price','>=',$upper);
+            $query->where('price','<=',$upper);
         }
         if(!empty($lower)){
-            $query->where('price','<=',$lower); 
+            $query->where('price','>=',$lower); 
         }
         if(!empty($stockUpper)){
             $query->where('stock','<=',$stockUpper); 
         }
         if(!empty($stockLower)){
-            $query->where('stock','<=',$stockLower); 
+            $query->where('stock','>=',$stockLower); 
         }
         $products = $query->get();
 
