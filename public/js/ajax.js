@@ -39,7 +39,7 @@ window.onload = function () {
         html = `
         <tr class="product-list">
         <td class="col-xs-3">${id}</td>
-        <td class="col-xs-3">${product_name}</a></td>
+        <td class="col-xs-3">${product_name}</td>
         <td class="col-xs-3">¥${price}</td>
         <td class="col-xs-3">${stock}個</td>
         </tr>

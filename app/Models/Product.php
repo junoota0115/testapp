@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ProductRequest;
+use Kyslik\ColumnSortable\Sortable; 
 
 class Product extends Model
 {
@@ -27,17 +28,17 @@ public function getList(){
         $products = Product::orderBy('created_at', 'asc')->where(function ($query) {
         
             // 検索機能
-            if ($search = request('search')) {
-                $query->where('product_name', 'LIKE', "%{$search}%");
-            }
+            // if ($search = request('search')) {
+            //     $query->where('product_name', 'LIKE', "%{$search}%");
+            // }
 
-            if($upper = request('upper')){
-                $query->where('price','>=',$upper);
-            }
+            // if($upper = request('upper')){
+            //     $query->where('price','>=',$upper);
+            // }
 
-            if($lower = request('lower')){
-                $query->where('price','<=',$lower);
-            }
+            // if($lower = request('lower')){
+            //     $query->where('price','<=',$lower);
+            // }
             
         })->paginate(20);
         return $products;
