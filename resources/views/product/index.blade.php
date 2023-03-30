@@ -15,23 +15,23 @@
       </div>
 
       <button type="button" id="button"  class="btn btn-info" value="aaa" >ボタン</button>
-  </form>
-<hr>
+    </form>
+    <hr>
     @if(session('err_msg'))
-      <p class="text-anger">
-        {{session('err_msg')}}
-      </p>
-      @endif
-      @auth
+    <p class="text-anger">
+      {{session('err_msg')}}
+    </p>
+    @endif
+    @auth
     <div><a class="nav-item nav-link" href="{{route('create')}}">新規追加</a></div>
     @endauth
-      <table>
-    <thead>
+    <table>
+      <thead>
         <tr>
-            <th>ID </th>
-            <th>商品名 </th>
-            <th>金額 </th>
-            <th>在庫 </th>
+            <th id="id">ID </th>
+            <th id="product_name">商品名 </th>
+            <th id="price">金額 </th>
+            <th id="stock">在庫 </th>
             <th></th>
             <th></th>
         </tr>
@@ -57,7 +57,7 @@
 </div>
 
 @endsection
-<script src="{{ asset('js/ajax.js') }}" defer>
-</script>
+<script src="{{ asset('js/ajax.js') }}" defer></script>
+<script src="{{ asset('js/sort.js') }}" defer></script>
 
   
