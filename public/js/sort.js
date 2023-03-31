@@ -1,5 +1,7 @@
-window.onload = function () {
-  $('sort').on('click',function(){
-    console.log(ソートOK);
-  })
-  }
+// window.addEventListener('load',function(){
+
+//   const sortStock = document.getElementById("stock");
+//   sortStock.addEventListener('click',function(){
+//     console.log("クリックされました");
+//   })
+// })

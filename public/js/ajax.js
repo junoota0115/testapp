@@ -11,7 +11,7 @@ window.onload = function () {
     const searchLower = $('#lower').val();
     const stockUpper = $('#stockUpper').val();
     const stockLower = $('#stockLower').val();
-    console.log(stockUpper);
+    
     $.ajax({
       type: 'GET',
       url: '/testapp/public/search' , //送りたいURL。ここのアクションが呼び出される
@@ -27,7 +27,7 @@ window.onload = function () {
       
       
     }).done(function (data) { //ajaxが成功したときの処理
-      console.log(data);  
+      // console.log(data);  
       $('#index').empty(); 
 
       let html = '';
@@ -57,11 +57,30 @@ window.onload = function () {
     }).fail(function(jqXHR,textStatus,errorThrown){
       alert('ファイルの取得に失敗しました。');
       console.log("ajax通信に失敗しました")
-      // console.log(jqXHR.status);
-      // console.log(textStatus);
-      // console.log(errorThrown);
+      console.log(jqXHR.status);
+      console.log(textStatus);
+      console.log(errorThrown);
     })
   })
-  }
-  
+
+
+
+//ソート機能のクリックイベント
+  $('#id').on('click',function(){
+  var $arr = $('#index tr').sort(function(a, b){
+      return ($(a).text() < $(b).text() ? 1 : -1);  //ソート条件
+    });
+    
+    // console.log($arr);    
+    //ソートした結果をコンソールに出力する
+    $arr.each(function(){
+      $('#index').append($arr);
+      console.log($arr);
+    });
+  })
+
+ 
+}
+
+
 
