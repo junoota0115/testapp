@@ -66,16 +66,28 @@ window.onload = function () {
 
 
 //ソート機能のクリックイベント
-  $('#id').on('click',function(){
+  $('#id-down').on('click',function(){
   var $arr = $('#index tr').sort(function(a, b){
       return ($(a).text() < $(b).text() ? 1 : -1);  //ソート条件
     });
     
-    // console.log($arr);    
     //ソートした結果をコンソールに出力する
     $arr.each(function(){
       $('#index').append($arr);
-      console.log($arr);
+      // console.log($arr);
+    });
+  })
+
+  //ソート機能のクリックイベント
+  $('#id-up').on('click',function(){
+  var $arr = $('#index tr').sort(function(a, b){
+      return ($(a).text() > $(b).text() ? 1 : -1);  //ソート条件
+    });
+    
+    //ソートした結果をコンソールに出力する
+    $arr.each(function(){
+      $('#index').append($arr);
+      // console.log($arr);
     });
   })
 

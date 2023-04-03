@@ -26,6 +26,8 @@
     <div><a class="nav-item nav-link" href="{{route('create')}}">新規追加</a></div>
     @endauth
     <table>
+      <th id="id-up">↑ </th>
+      <th id="id-down">↓ </th>
       <thead>
         <tr>
             <th id="id">ID </th>
