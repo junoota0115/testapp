@@ -28,29 +28,31 @@ window.onload = function () {
       
     }).done(function (data) { //ajaxが成功したときの処理
       // console.log(data);  
-      $('#index').empty(); 
+      
+            if (data.length === 0){//もし何もなければ
+              // $('#index').after('<p class="text-center mt-5 search-null">検索結果はありません</p>');
+              alert("検索しましたがヒットしませんでした。");
+            }else{
 
-      let html = '';
-      $.each(data,function(index,value){
-        let id = value.id;
-        let product_name = value.product_name;
-        let price = value.price;
-        let stock = value.stock;
-        html = `
-        <tr class="product-list">
-        <td class="col-xs-3">${id}</td>
-        <td class="col-xs-3"><a href="product/${id}">${product_name}</a></td> 
-        <td class="col-xs-3">¥${price}</td>
-        <td class="col-xs-3">${stock}個</td>
-        </tr>
-        `;
-        $('#index').append(html);
-      });
-
-      if (data.length === 0){//もし何もなければ
-        // $('#index').after('<p class="text-center mt-5 search-null">検索結果はありません</p>');
-        alert("検索しましたがヒットしませんでした。");
-      }
+              $('#index').empty(); 
+              
+              let html = '';
+              $.each(data,function(index,value){
+                let id = value.id;
+                let product_name = value.product_name;
+                let price = value.price;
+                let stock = value.stock;
+                html = `
+                <tr class="product-list">
+                <td class="col-xs-3">${id}</td>
+                <td class="col-xs-3"><a href="product/${id}">${product_name}</a></td> 
+                <td class="col-xs-3">¥${price}</td>
+                <td class="col-xs-3">${stock}個</td>
+                </tr>
+                `;
+                $('#index').append(html);
+              });
+            }
       
 
       
@@ -101,7 +103,7 @@ $(function(){
 //＝＝＝商品名のソート機能＝＝＝
 $(function(){
   let count = 0;
-  $('#product_id').on('click',function(){  //クリック数をカウント
+  $('#product_name').on('click',function(){  //クリック数をカウント
     count++;
 
       if ((count) % 2 == 0){  //もしクリック数が偶数回ならば
