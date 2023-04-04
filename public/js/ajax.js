@@ -65,34 +65,99 @@ window.onload = function () {
 
 
 
-//ソート機能のクリックイベント
-  $('#id-down').on('click',function(){
-  var $arr = $('#index tr').sort(function(a, b){
-      return ($(a).text() < $(b).text() ? 1 : -1);  //ソート条件
-    });
-    
-    //ソートした結果をコンソールに出力する
-    $arr.each(function(){
-      $('#index').append($arr);
-      // console.log($arr);
-    });
+//＝＝＝＝＝ソート機能のクリックイベント＝＝＝＝＝＝
+
+//＝＝＝idのソート機能＝＝＝
+$(function(){
+  let count = 0;
+  $('#id').on('click',function(){  //クリック数をカウント
+    count++;
+
+      if ((count) % 2 == 0){  //もしクリック数が偶数回ならば
+        // console.log("偶数回");
+        var $arr = $('#index tr').sort(function(a, b){
+          return ($(a).text() > $(b).text() ? 1 : -1);  //ソート条件
+        });
+        //ソートした結果をコンソールに出力する
+        $arr.each(function(){
+          $('#index').append($arr);
+        });
+        
+      }else{ //クリック数が奇数回ならば
+        // console.log("奇数回");
+        var $arr = $('#index tr').sort(function(a, b){
+          return ($(a).text() < $(b).text() ? 1 : -1);  //ソート条件
+        })
+        //ソートした結果をコンソールに出力する
+        $arr.each(function(){
+          $('#index').append($arr);
+        })
+      }
+
   })
+});
+//＝＝＝idのソート機能＝＝＝
 
-  //ソート機能のクリックイベント
-  $('#id-up').on('click',function(){
-  var $arr = $('#index tr').sort(function(a, b){
-      return ($(a).text() > $(b).text() ? 1 : -1);  //ソート条件
-    });
-    
-    //ソートした結果をコンソールに出力する
-    $arr.each(function(){
-      $('#index').append($arr);
-      // console.log($arr);
-    });
+//＝＝＝商品名のソート機能＝＝＝
+$(function(){
+  let count = 0;
+  $('#product_id').on('click',function(){  //クリック数をカウント
+    count++;
+
+      if ((count) % 2 == 0){  //もしクリック数が偶数回ならば
+        // console.log("偶数回");
+        var $arr = $('#index tr').sort(function(a, b){
+          return ($(a).text() > $(b).text() ? 1 : -1);  //ソート条件
+        });
+        //ソートした結果をコンソールに出力する
+        $arr.each(function(){
+          $('#index').append($arr);
+        });
+        
+      }else{ //クリック数が奇数回ならば
+        // console.log("奇数回");
+        var $arr = $('#index tr').sort(function(a, b){
+          return ($(a).text() < $(b).text() ? 1 : -1);  //ソート条件
+        })
+        //ソートした結果をコンソールに出力する
+        $arr.each(function(){
+          $('#index').append($arr);
+        })
+      }
+
   })
+});
+//＝＝＝idのソート機能＝＝＝
+  
+  
+};
 
- 
-}
 
+// ===ボタンを分けてソートする場合===
+  // $('#id-down').on('click',function(){
+  // var $arr = $('#index tr').sort(function(a, b){
+  //     return ($(a).text() < $(b).text() ? 1 : -1);  //id-downをクリックした場合
+  //   });
+    
+  //   //ソートした結果をコンソールに出力する
+  //   $arr.each(function(){
+  //     $('#index').append($arr);
+  //     // console.log($arr);
+  //   });
+  // })
+
+  // //ソート機能のクリックイベント
+  // $('#id-up').on('click',function(){
+  // var $arr = $('#index tr').sort(function(a, b){
+  //     return ($(a).text() > $(b).text() ? 1 : -1);  //id-upをクリックした場合
+  //   });
+    
+  //   //ソートした結果をコンソールに出力する
+  //   $arr.each(function(){
+  //     $('#index').append($arr);
+  //     // console.log($arr);
+  //   });
+  // })
+// ===============
 
 
