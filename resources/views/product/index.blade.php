@@ -58,6 +58,6 @@
 
 @endsection
 <script src="{{ asset('js/ajax.js') }}" defer></script>
-<script src="{{ asset('js/sort.js') }}" defer></script>
+
 
   
