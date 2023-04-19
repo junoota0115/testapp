@@ -1,3 +1,6 @@
+
+
+
 // $(function() {
 //   alert("jQueryが正常に動作しています！");
 // });
@@ -163,3 +166,42 @@ $(function(){
 // ===============
 
 
+//=====削除機能=====
+$(function(){
+  $('.btn-danger').on('click',function(){
+    console.log("押しました");
+    $.ajaxSetup({
+      headers:{
+        'X-CSRF-TOKEN':'{{csrf_token()}}'
+      }
+    });
+
+    var deleteConfirm = confirm('本当に削除しますか??');
+    if(deleteConfirm == true){
+      var clickDel = $(this)
+      var productID = clickDel.attr('product_id');
+      // console.log(productID);
+    
+    $.ajax({
+      type:'post',
+      url:'/testapp/public/destroy/'+productID,
+      data:{'id':productID,
+      '_method':'DELETE'},
+      dataType:'json',
+    })
+
+.done(function(){
+  clickDel.parents('tr').remove();
+})
+
+.fail(function(){
+  alert('エラーです');
+});
+
+    }else{
+(function(e){
+  e.preventDefault()
+});
+    };
+  });
+});

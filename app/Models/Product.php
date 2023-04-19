@@ -119,18 +119,18 @@ public function getSubmit(ProductRequest $request){
         \Session::flash('err_msg','更新しました。');
     }
 
-    //商品削除
-    public function getDelete($id){
-        if (empty($id)){
-            \Session::flash('err_msg','データがありません');
-            return redirect(route('Products'));
-        }
-        try{
-            //商品削除
-            Product::destroy($id);
-        }catch(\Throwable $e){
-            abort(500);
-        }
-        \Session::flash('err_msg','データを削除しました');
-    }
+    // //商品削除
+    // public function getDelete($id){
+    //     if (empty($id)){
+    //         \Session::flash('err_msg','データがありません');
+    //         return redirect(route('Products'));
+    //     }
+    //     try{
+    //         //商品削除
+    //         Product::destroy($id);
+    //     }catch(\Throwable $e){
+    //         abort(500);
+    //     }
+    //     \Session::flash('err_msg','データを削除しました');
+    // }
 }

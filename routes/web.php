@@ -41,3 +41,7 @@ Route::post('/product/update','ProductController@exeUpdate')->name('update')->mi
 
 // 商品削除
 Route::get('/product/delete/{id}','ProductController@showDelete')->name('delete')->middleware('auth');
+
+// 非同期削除
+Route::get('/destroy/{id}','ProductController@destroy');
+Route::post('/destroy/{id}','ProductController@destroy');
