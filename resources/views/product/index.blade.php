@@ -45,7 +45,11 @@
             <td>¥{{ $product->price }}</td>
             <td>{{ $product->stock }}個</td>
             @auth
-            <td><a href="{{route('delete',$product->id)}}" class="btn btn-primary" onclick=>削除</a></td>
+            <td>
+           <form class="id">
+              <input product_id="{{$product->id}}" type="submit" class="btn btn-danger" value="TEST">
+            </form>
+          </td>
             @endauth
 
         </tr>

@@ -123,15 +123,28 @@ class ProductController extends Controller
     return redirect(route('Products'));
 }
     /*===========================*/
-    /**
-     * 商品削除
-     * @param int $id
-     * @return view
-     */
-    public function showDelete($id){
-        $product_model = new Product();
-        $product_model->getEdit($id);
+    // /**
+    //  * 商品削除
+    //  * @param int $id
+    //  * @return view
+    //  */
+    // public function showDelete($id){
+    //     $product_model = new Product();
+    //     $product_model->getEdit($id);
 
-        return redirect(route('Products'));
-    }
+    //     return redirect(route('Products'));
+    // }
+
+     /*========非同期削除===================*/
+     public function destroy(Request $request){
+         $product = Product::findOrFail($request->id);
+           dd($product);
+         $product->delete();    
+         return response()->json(['result'=>'成功']);
+
+     }
 }
+
+
+// 405エラーはリクエストされたページが実在することを（また、URLが正しく入力されたことを）
+// 確認した上で、リクエストをするのに使用されたHTTPメソッドが許可されないことを意味します。

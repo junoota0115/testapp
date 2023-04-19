@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', '商品詳細')
 @section('content')
-<div class="row">
+<div class="row" >
   <div class="col-md-8 col-md-offset-2">
   <tr>
   @if ($product->img_path !=='')
@@ -32,3 +32,5 @@
   </div>
 </div>
 @endsection
+
+<!-- <script src="{{ asset('js/delete.js') }}" defer></script> -->
