@@ -138,10 +138,8 @@ class ProductController extends Controller
 
      /*========非同期削除===================*/
      public function destroy(Request $request){
-        //  $product = Product::findOrFail($request->id);
         //  dd($product);
-        //  Log::info($product);
-        //  Product::delete($request->id);  
+        //  Log::info($product);  処理のログをstorageフォルダ内に保存
          $db_data = new Product;
          $db_data->destroy($request->id); 
          return response()->json(['result'=>'成功']);

@@ -170,11 +170,6 @@ $(function(){
 $(function(){
   $('.btn-danger').on('click',function(){
     console.log("押しました");
-    // $.ajaxSetup({
-    //   headers:{
-    //     'X-CSRF-TOKEN':'{{csrf_token()}}'
-    //   }
-    // });
 
     var deleteConfirm = confirm('本当に削除しますか??');
     if(deleteConfirm == true){
@@ -184,8 +179,7 @@ $(function(){
     
     $.ajax({
       headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    },
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
       type:'post',
       url:'destroy',
       data:{'id':productID,},
@@ -195,12 +189,12 @@ $(function(){
     })
 
 .done(function(){
-  console.log("成功です");
+  alert("削除しました。");
   clickDel.parents('tr').remove();
 })
 
 .fail(function(){
-  alert('エラーです');
+  alert('エラーです！！');
 });
 
     }else{
