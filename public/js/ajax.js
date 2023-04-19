@@ -170,11 +170,11 @@ $(function(){
 $(function(){
   $('.btn-danger').on('click',function(){
     console.log("押しました");
-    $.ajaxSetup({
-      headers:{
-        'X-CSRF-TOKEN':'{{csrf_token()}}'
-      }
-    });
+    // $.ajaxSetup({
+    //   headers:{
+    //     'X-CSRF-TOKEN':'{{csrf_token()}}'
+    //   }
+    // });
 
     var deleteConfirm = confirm('本当に削除しますか??');
     if(deleteConfirm == true){
@@ -183,14 +183,19 @@ $(function(){
       // console.log(productID);
     
     $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    },
       type:'post',
-      url:'/testapp/public/destroy/'+productID,
-      data:{'id':productID,
-      '_method':'DELETE'},
+      url:'destroy',
+      data:{'id':productID,},
       dataType:'json',
+      async:true,
+      cache:false,
     })
 
 .done(function(){
+  console.log("成功です");
   clickDel.parents('tr').remove();
 })
 
