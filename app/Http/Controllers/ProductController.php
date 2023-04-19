@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -137,9 +138,12 @@ class ProductController extends Controller
 
      /*========非同期削除===================*/
      public function destroy(Request $request){
-         $product = Product::findOrFail($request->id);
-           dd($product);
-         $product->delete();    
+        //  $product = Product::findOrFail($request->id);
+        //  dd($product);
+        //  Log::info($product);
+        //  Product::delete($request->id);  
+         $db_data = new Product;
+         $db_data->destroy($request->id); 
          return response()->json(['result'=>'成功']);
 
      }
