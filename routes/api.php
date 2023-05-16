@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\SalesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,15 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+});
+
+// Route::apiResource('sales','SalesController');
+
+Route::middleware(['middleware' => 'api'])->group(function () {
+    // # 商品id追加
+    // Route::get('sales/update/{id}', 'SalesController@update'); 
+    Route::post('sales/update/{id}', 'SalesController@update'); 
+    // # Salesテーブルデータ表示
+    Route::get('/sales','SalesController@index');
+
 });

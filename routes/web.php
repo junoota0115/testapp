@@ -45,3 +45,4 @@ Route::get('/product/delete/{id}','ProductController@showDelete')->name('delete'
 // 非同期削除
 // Route::get('/destroy/{id}','ProductController@destroy');
 Route::post('/destroy','ProductController@destroy');
+
