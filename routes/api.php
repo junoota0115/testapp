@@ -13,8 +13,17 @@ use App\Http\Controllers\SalesController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('sales','SalesController@index');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+});
+
+// Route::apiResource('sales','SalesController');
+
+Route::middleware(['middleware' => 'api'])->group(function () {
+    // # 商品id追加
+    // Route::get('sales/update/{id}', 'SalesController@update'); 
+    Route::post('sales/update/{id}', 'SalesController@update'); 
+    // # Salesテーブルデータ表示
+    Route::get('/sales','SalesController@index');
+
 });

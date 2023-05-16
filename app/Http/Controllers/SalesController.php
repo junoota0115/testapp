@@ -1,89 +1,56 @@
 <?php
 
 namespace App\Http\Controllers;
-// use App\Http\Controllers\Product;
 use Illuminate\Http\Request;
 use App\Models\Sales;
-use Illuminate\Support\Facades\DB;
+use App\Models\Product;
+use Carbon\Carbon;
 
 class SalesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    
+    public function store()
     {
-        try{
-            $product_id = Sales::first();
-            $result = [
-                'result' => true,
-                'product_id' => $product_id->product_id,
-            ];
-            // dd($result);
-        }catch(\Exception $e){
-            $result = [
-                'result' => false,
-                'error' =>[
-                    'messages' => [$e->getMessage()]
-                ],
-            ];
-            return $this->resConversionJson($result,$e->getCord());
+
+    }
+    //========== update api ==========
+    public function update($id)
+    {
+        //送られてきたproductのidをsalesテーブルに追加
+        
+        //productのidでproductsを検索しstockが0かどうか確認
+        $product_stock = Product::select('products.*')
+        ->where('id','=',$id)
+        ->first();
+        // var_dump($product_stock);
+        // ->get();//配列で入ってくる
+        
+        //1つでもあれば、-1してstockを更新する
+        if($product_stock->stock <= 0) {
+            echo('在庫がありません！');
+        }else{
+           Sales::insert([
+            'product_id' => $id,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+           $stock = $product_stock->stock -1;
+           Product::where('id','=',$id)->update(['stock' => $stock]);
+           echo('成功しました');        }
+
+    }
+    //========== update api ==========
+
+    //===========index==========
+        public function index(){
+            $sales = Sales::all();
+            return response()->json($sales);
         }
-        return $this->resConversionJson($result);
-        //
-    }
+        public function show(){
 
-    private function resConversionJson($result,$statusCode=200){
-        if(empty($statusCode)||$statusCode<100 || $statusCode >= 600){
-            $statusCode = 500;
         }
-        return response()->json($result,$statusCode,['Content-Type' => 'application/json'],JSON_UNESCAPED_SLASHES);
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
+// $product_stock = Product::where('id','=',$sales_id)->where('stock');
+// dd($product_stock);

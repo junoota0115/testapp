@@ -23,7 +23,7 @@
     </p>
     @endif
     @auth
-    <div><a class="nav-item nav-link" href="{{route('create')}}">新規追加</a></div>
+    <div><a class="btn btn-primary" href="{{route('create')}}" style="width:8rem;">新規追加</a></div>
     @endauth
     <table>
       <thead>
