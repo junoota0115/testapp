@@ -17,7 +17,7 @@ window.onload = function () {
     
     $.ajax({
       type: 'GET',
-      url: '/testapp/public/search' , //送りたいURL。ここのアクションが呼び出される
+      url: '/search' , //送りたいURL。ここのアクションが呼び出される
         data: {
           'search': searchWord, 
           'upper': searchUpper, 
