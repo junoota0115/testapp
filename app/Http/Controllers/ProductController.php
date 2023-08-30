@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Company;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -75,8 +76,10 @@ class ProductController extends Controller
     public function showDetail($id){
         $product_model = new Product();
         $product = $product_model->getDetail($id);
+        $companies = Company::where('id','=',$product['company_id'])
+        ->first();
 
-        return view ('product.detail',['product' => $product]);
+        return view ('product.detail',['product' => $product,'companies'=>$companies]);
     }
     /*===========================*/
     /**

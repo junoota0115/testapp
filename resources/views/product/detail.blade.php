@@ -12,7 +12,7 @@
 
   <td>{{ $product->id}}</td>
   <td>社名:{{
-        $product->company_id}}</td>
+        $companies->company_name}}</td>
 
   <td>商品名:{{
         $product->product_name}}</td>
